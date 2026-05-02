@@ -12,9 +12,15 @@ const app = express();
 // 2. Inicia a conexão com o MongoDB Atlas
 connectDB();
 
-// 3. Middlewares Globais
-app.use(cors()); 
-app.use(express.json()); 
+/// 3. Middlewares Globais
+app.use(cors({
+  origin: ['https://projeto-deducao.vercel.app', 'http://localhost:5173'], // Permite sua Vercel e o Vite local
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'x-auth-token'], // Essencial para o seu interceptor de login
+  optionsSuccessStatus: 200
+}));
+
+app.use(express.json());
 
 // 4. Definição das Rotas da API
 app.use('/api/auth', authRoutes);
