@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Search, FolderLock, FileText, Map, Users, LogOut, ShieldAlert } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import api from '../../utils/api';
+import backgroundCrime from '../../assets/background-crime.png';
 
 // 1. Casos base que aparecem para TODOS (definidos fora da função)
 const STARTER_CASES = [
@@ -67,10 +68,10 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-dark-900 text-gray-200 font-sans flex overflow-hidden">
       <div 
-        className="fixed inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-20 pointer-events-none"
-        style={{ backgroundImage: "url('/src/assets/background-crime.png')" }}
-      />
-
+  className="min-h-screen bg-cover bg-center"
+  style={{ backgroundImage: `url(${backgroundCrime})` }}
+>
+  
       {/* SIDEBAR */}
       <aside className="relative z-10 w-64 bg-black/90 backdrop-blur-xl border-r border-dark-800 flex flex-col justify-between p-6 shadow-2xl">
         <div>
