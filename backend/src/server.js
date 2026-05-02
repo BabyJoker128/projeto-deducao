@@ -12,14 +12,28 @@ const app = express();
 // 2. Inicia a conexão com o MongoDB Atlas
 connectDB();
 
+// No seu server.js
+
 /// 3. Middlewares Globais
+// Certifique-se de que este bloco esteja ANTES de app.use('/api/auth', ...)
 app.use(cors({
-  origin: ['https://projeto-deducao.vercel.app', 'http://localhost:5173'], // Permite sua Vercel e o Vite local
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'x-auth-token'], // Essencial para o seu interceptor de login
+  origin: function (origin, callback) {
+    const allowedOrigins = ['https://projeto-deducao.vercel.app', 'http://localhost:5173'];
+    // Permite requisições sem origin (como mobile ou ferramentas de teste) 
+    // ou que venham dos domínios autorizados
+    if (!origin || allowedOrigins.indexOf(origin) !== -1 || origin.endsWith('.vercel.app')) {
+      callback(null, true);
+    } else {
+      callback(new Error('Acesso bloqueado pelo protocolo de segurança CORS'));
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'x-auth-token', 'Authorization'],
   optionsSuccessStatus: 200
 }));
 
+// Esta linha é crucial para responder explicitamente às requisições OPTIONS
+app.options('*', cors());
 app.use(express.json());
 
 // 4. Definição das Rotas da API
