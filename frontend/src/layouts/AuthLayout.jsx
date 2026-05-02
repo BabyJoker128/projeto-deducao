@@ -6,7 +6,7 @@ export default function AuthLayout({ children }) {
       {/* Imagem de Fundo (Mural de Evidências) */}
       <div 
         className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/src/assets/background-crime.png')" }}
+        style={{ backgroundImage: `url(${backgroundCrime})` }}
       />
       
       {/* Overlay escuro para melhorar a leitura e clima sombrio */}
