@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import api from '../../utils/api';
 import backgroundCrime from '../../assets/background-crime.png';
 
-// 1. Casos base que aparecem para TODOS (definidos fora da função)
+// 1. Casos base que aparecem para TODOS
 const STARTER_CASES = [
   {
     _id: 'tutorial-001',
@@ -43,7 +43,7 @@ export default function Dashboard() {
   const fetchCases = async () => {
     try {
       const response = await api.get('/cases');
-      // Filtra para garantir que "Ouro e Cinzas" não apareça
+      // Filtra para garantir que "Ouro e Cinzas" permaneça oculto na interface
       const dbCases = response.data.filter(c => c.titulo !== 'Ouro e Cinzas');
       
       setCases(prev => {
@@ -63,15 +63,15 @@ export default function Dashboard() {
   }, []);
 
   const casosAtivos = cases.filter(c => c.status !== 'Fechado');
-  const casosEncerrados = cases.filter(c => c.status === 'Fechado');
 
   return (
     <div className="min-h-screen bg-dark-900 text-gray-200 font-sans flex overflow-hidden">
+      {/* Imagem de Fundo Processada */}
       <div 
-  className="min-h-screen bg-cover bg-center"
-  style={{ backgroundImage: `url(${backgroundCrime})` }}
->
-  
+        className="fixed inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-20 pointer-events-none"
+        style={{ backgroundImage: `url(${backgroundCrime})` }}
+      />
+
       {/* SIDEBAR */}
       <aside className="relative z-10 w-64 bg-black/90 backdrop-blur-xl border-r border-dark-800 flex flex-col justify-between p-6 shadow-2xl">
         <div>
@@ -129,7 +129,6 @@ export default function Dashboard() {
   );
 }
 
-// Sub-componentes auxiliares
 function NavItem({ icon, label, active = false }) {
   return (
     <button className={`flex items-center gap-3 p-3 rounded transition-all w-full text-left font-serif ${active ? 'bg-blood-900/20 text-white border-l-2 border-blood-600' : 'text-gray-500 hover:text-gray-300'}`}>
@@ -138,13 +137,13 @@ function NavItem({ icon, label, active = false }) {
   );
 }
 
-function CaseFolder({ caso, closed = false, onClick }) {
+function CaseFolder({ caso, onClick }) {
   return (
     <div 
       onClick={onClick}
-      className={`relative bg-gradient-to-br from-[#1a1a1a] to-black border ${closed ? 'border-dark-800' : 'border-dark-700 hover:border-blood-600'} p-6 rounded-md transition-all cursor-pointer shadow-2xl group`}
+      className="relative bg-gradient-to-br from-[#1a1a1a] to-black border border-dark-700 hover:border-blood-600 p-6 rounded-md transition-all cursor-pointer shadow-2xl group"
     >
-      <FolderLock className={`mb-4 ${closed ? 'text-gray-700' : 'text-blood-600 group-hover:scale-110 transition-transform'}`} size={32} />
+      <FolderLock className="mb-4 text-blood-600 group-hover:scale-110 transition-transform" size={32} />
       <h4 className="text-lg font-serif text-gray-200 uppercase tracking-tighter mb-1 leading-tight">{caso.titulo}</h4>
       <p className="text-[10px] text-gray-600 font-mono mb-4">REGISTRO: {new Date(caso.dataRegistro).toLocaleDateString()}</p>
       <div className="flex gap-4 border-t border-dark-800 pt-4 mt-4">

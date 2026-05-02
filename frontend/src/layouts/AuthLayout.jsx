@@ -1,4 +1,5 @@
 import React from 'react';
+import backgroundCrime from '../assets/background-crime.png';
 
 export default function AuthLayout({ children }) {
   return (
@@ -9,7 +10,7 @@ export default function AuthLayout({ children }) {
         style={{ backgroundImage: `url(${backgroundCrime})` }}
       />
       
-      {/* Overlay escuro para melhorar a leitura e clima sombrio */}
+      {/* Overlay escuro para clima sombrio */}
       <div className="absolute inset-0 z-10 bg-black/70 backdrop-brightness-50" />
 
       {/* Container Principal */}

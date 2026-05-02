@@ -10,21 +10,11 @@ export default function AuthPage() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
-  // Estados para capturar os dados do LOGIN
-  const [loginData, setLoginData] = useState({
-    email: '',
-    senha: ''
-  });
-
-  // Estados para capturar os dados do CADASTRO
+  const [loginData, setLoginData] = useState({ email: '', senha: '' });
   const [registerData, setRegisterData] = useState({
-    nome: '',
-    email: '',
-    senha: '',
-    confirmaSenha: ''
+    nome: '', email: '', senha: '', confirmaSenha: ''
   });
 
-  // Lógica de LOGIN
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -32,10 +22,7 @@ export default function AuthPage() {
         email: loginData.email,
         senha: loginData.senha
       });
-
-      // Guarda o token para o sistema saber que você está logado
       localStorage.setItem('token', response.data.token);
-      
       alert(`Bem-vindo de volta, detetive ${response.data.user.nome}!`);
       navigate('/painel'); 
     } catch (err) {
@@ -43,22 +30,16 @@ export default function AuthPage() {
     }
   };
 
-  // Lógica de CADASTRO
   const handleRegister = async (e) => {
     e.preventDefault();
-    
     if (registerData.senha !== registerData.confirmaSenha) {
       alert('[ERRO] As senhas não coincidem.');
       return;
     }
-
     try {
       const response = await api.post('/auth/register', {
-        nome: registerData.nome,
-        email: registerData.email,
-        senha: registerData.senha
+        nome: registerData.nome, email: registerData.email, senha: registerData.senha
       });
-
       alert(response.data.msg); 
       setRegisterData({ nome: '', email: '', senha: '', confirmaSenha: '' });
     } catch (err) {
