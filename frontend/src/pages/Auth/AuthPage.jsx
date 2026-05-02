@@ -4,6 +4,7 @@ import AuthLayout from '../../layouts/AuthLayout';
 import GlassCard from '../../components/ui/GlassCard';
 import { Mail, Lock, User, EyeOff, Eye } from 'lucide-react';
 import api from '../../utils/api'; // Certifique-se que este arquivo existe em src/utils/api.js
+import backgroundCrime from '../../assets/background-crime.png';
 
 export default function AuthPage() {
   const navigate = useNavigate();
