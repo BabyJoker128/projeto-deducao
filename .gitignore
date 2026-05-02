@@ -1,0 +1,12 @@
+# Dependências
+node_modules/
+
+# Variáveis de Ambiente (Senhas e Chaves)
+.env
+
+# Arquivos de Build
+dist/
+build/
+
+# Sistema
+.DS_Store

@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@theme {
+  --color-blood-600: #991b1b;
+  --color-blood-700: #7f1d1d;
+  --color-blood-900: #450a0a;
+  --color-dark-900: #0a0a0a;
+  --color-dark-800: #1a1a1a;
+  --font-sans: "Inter", sans-serif;
+  --font-serif: "Merriweather", serif;
+  --font-mono: "Courier Prime", monospace;
+}
+
+body {
+  background-color: var(--color-dark-900);
+}
