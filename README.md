@@ -7,7 +7,7 @@ Uma aplicação web voltada para experiências de jogos investigativos, permitin
 * **Gestão de Assets:** Sincronização e filtragem dinâmica de arquivos e layouts de investigação.
 
 ## 🚀 Tecnologias e Ferramentas
-* **Frontend:** Vite + React (ou sua tecnologia usada)
+* **Frontend:** Vite + React
 * **Backend:** Lógica de servidor para protocolos de investigação.
 * **Deploy:** Vercel (Frontend) e Render (Backend).
 
